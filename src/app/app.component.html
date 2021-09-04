@@ -1,0 +1,33 @@
+
+<div class="container">
+  <h2 class="bg-primary text-white text-center mb-5 p-3"> Makeup Store App </h2>
+  
+  <button class="btn btn-primary" (click)="allProductsCategory()">category</button>
+  
+  <!-- <ul class="list-group list-group-horizontal flex-wrap justify-content-center">
+    <li *ngFor="let product of allProducts" class="list-group-item m-1 text-uppercase text-primary border">
+      {{product.category}}
+    </li>
+  </ul> -->
+
+  <div class="d-flex flex-wrap">
+    <div *ngFor="let product of allProducts" class="card m-2" style="width: 18rem;">
+      <img src="{{product.image_link}}" onerror="this.onerror=null;this.src='https://www.coorg.com/wp-content/themes/TechNews/images/img_not_available.jpg';" class="card-img-top overflow-hidden" style="height: 286px;" >
+      <div class="card-body">
+        <h5 class="card-title">{{product.name}} ({{product.brand}}}})</h5>
+        <p class="card-text overflow-hidden" style="max-height: 50px;">{{product.description}}</p>
+        <p class="card-text">Price {{product.price_sign}} {{product.price}}</p>
+        <a href="{{product.product_link}}" class="btn btn-primary">See More {{product.name}}</a>
+      </div>
+    </div>
+  </div>
+  
+
+</div>
+
+
+<!-- <ul class="list-group list-group-horizontal flex-wrap justify-content-between">
+  <li *ngFor="let dogbread of dogsBread;"  class="list-group-item m-1 text-uppercase text-primary">
+    <span [id]="dogbread" class="" (click)="singleBreadDogs($event)"> {{dogbread}} </span>    
+  </li>
+</ul> -->
