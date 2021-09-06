@@ -59,18 +59,16 @@ export class AppComponent implements OnInit{
   productsByType(event:any) {
     this.allProducts = [];
     this.noData= true;
-    console.log(event.target.value);
+    // console.log(event.target.value);
     this.httpservice.product_type = event.target.value;
     this.httpservice.getProductsByType().subscribe((data) => {
       this.allProductTypeData = data;
       this.allProductTypeData = this.allProductTypeData;
       this.allProducts = this.allProductTypeData;
-
       // this.allProducts = this.allProducts.sort((a:any, b:any) => (a.price > b.price) ? 1 : (a.price === b.price) ? ((a.name > b.name) ? 1 : -1) : -1 );
-
       this.noData= false;
-      // console.log(this.allProductTypeData);
     });
+    // console.log(this.httpservice);
   }
 
   sortByPrice() {
@@ -80,6 +78,14 @@ export class AppComponent implements OnInit{
   }
 
   sortByPriceReverse() {
-    // this.allProducts.reverse();
+    this.allProducts.reverse();
+  }
+
+  productsByCategory(){
+    this.httpservice.getProductsByCategory();
+  }
+
+  productsByBrand(){
+    this.httpservice.getProductsByBrand();
   }
 }

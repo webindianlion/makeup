@@ -11,14 +11,20 @@
     </li>
   </ul> -->
   <hr class="border border-primary" />
-  
-  <select name="" id="" (change)="productsByType($event)" class="text-uppercase">
+  <select name="" id="productsByType" (change)="productsByType($event)" class="text-uppercase">
+    <option value=""> Sort By Product Type </option>
     <option *ngFor="let type of allProduct_Type" value="{{type}}"> {{type}} </option>
   </select>
 
   <button class="btn btn-primary m-2" (click)="sortByPrice()" [disabled]="noData">Sort By Price(Assending)</button>
 
   <button class="btn btn-primary m-2" (click)="sortByPriceReverse()" [disabled]="noData">Sort By Price(Desending)</button>
+
+  <button class="btn btn-primary m-2" (click)="allProductsData()" [disabled]="noData">All Products</button>
+
+  <button class="btn btn-primary m-2" (click)="productsByCategory()" [disabled]="noData">Sort By category</button>
+
+  <button class="btn btn-primary m-2" (click)="productsByBrand()" [disabled]="noData">Sort By Brand</button>
 
   <hr class="border border-primary" />
 
@@ -29,12 +35,12 @@
     </div>
     
     <div *ngFor="let product of allProducts" class="card m-2" style="width: 18rem;">
-      <img src="{{product.image_link}}" onerror="this.onerror=null;this.src='https://www.coorg.com/wp-content/themes/TechNews/images/img_not_available.jpg';" class="card-img-top overflow-hidden" style="height: 286px;" >
+      <!-- <img src="{{product.image_link}}" onerror="this.onerror=null;this.src='https://www.coorg.com/wp-content/themes/TechNews/images/img_not_available.jpg';" class="card-img-top overflow-hidden" style="height: 286px;" > -->
       <div class="card-body">
-        <h5 class="card-title">{{product.name}} ({{product.brand}})</h5>
+        <!-- <h5 class="card-title">{{product.name}} ({{product.brand}})</h5> -->
         <p class="card-text overflow-hidden" style="max-height: 50px;">{{product.product_type}}</p>
         <p class="card-text">Price {{product.price_sign}} {{product.price}}</p>
-        <a href="{{product.product_link}}" class="btn btn-primary">More Info</a>
+        <!-- <a href="{{product.product_link}}" class="btn btn-primary">More Info</a> -->
       </div>
     </div>
   </div>
