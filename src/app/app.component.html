@@ -2,55 +2,94 @@
 <div class="container">
   <h2 class="bg-primary text-white text-center mb-5 p-3"> Makeup Store App </h2>
   
-  <button class="btn btn-primary m-2" (click)="allProductsCategory()"  [disabled]="noData">category</button>
-  <button class="btn btn-primary m-2" (click)="allProductsType()" [disabled]="noData">Product Type</button>
+  <!-- <button class="btn btn-primary m-2" (click)="allProductsCategory()"  [disabled]="noData">category</button>
+  <button class="btn btn-primary m-2" (click)="allProductsType()" [disabled]="noData">Product Type</button> -->
   
   <!-- <ul class="list-group list-group-horizontal flex-wrap justify-content-center">
     <li *ngFor="let product of allProducts" class="list-group-item m-1 text-uppercase text-primary border">
       {{product.category}}
     </li>
   </ul> -->
+  <div class="row">
+    <div class="col">
+      <select name="" id="productsByType" (change)="getFilteredProducts($event)" class="form-select form-select-lg text-uppercase m-2">
+        <option value=""> Product By Type </option>
+        <option *ngFor="let type of allProduct_Type" value="{{type}}"> {{type}} </option>
+      </select>
+    </div>
+    <div class="col">
+      <select name="" id="productsByType" (change)="getFilteredProducts($event)" class="form-select form-select-lg text-uppercase m-2">
+        <option value=""> Product By Category </option>
+        <option *ngFor="let category of allCategory" value="{{category}}"> {{category}} </option>
+      </select>
+    </div>
+    <div class="col">
+      <select name="" id="productsByType" (change)="getFilteredProducts($event)" class="form-select form-select-lg text-uppercase m-2">
+        <option value=""> Product By Brand </option>
+        <option *ngFor="let brand of allBrands" value="{{brand}}"> {{brand}} </option>
+      </select>
+    </div>
+  </div>
+
   <hr class="border border-primary" />
-  <select name="" id="productsByType" (change)="productsByType($event)" class="text-uppercase">
-    <option value=""> Sort By Product Type </option>
-    <option *ngFor="let type of allProduct_Type" value="{{type}}"> {{type}} </option>
-  </select>
+  
+  <div class="row">
+    <div class="col text-center">
+      <button class="btn btn-primary m-2" (click)="sortByPrice()" [disabled]="noData">Sort By Price(Assending)</button>
+    </div>
+    <div class="col text-center">
+      <button class="btn btn-primary m-2" (click)="sortByPriceReverse()" [disabled]="noData">Sort By Price(Desending)</button>
+    </div>
+    <div class="col text-center">
+      <button class="btn btn-primary m-2" (click)="allProductsData()" [disabled]="noData">All Products</button>
+    </div>    
+  </div>
 
-  <button class="btn btn-primary m-2" (click)="sortByPrice()" [disabled]="noData">Sort By Price(Assending)</button>
-
-  <button class="btn btn-primary m-2" (click)="sortByPriceReverse()" [disabled]="noData">Sort By Price(Desending)</button>
-
-  <button class="btn btn-primary m-2" (click)="allProductsData()" [disabled]="noData">All Products</button>
-
-  <button class="btn btn-primary m-2" (click)="productsByCategory()" [disabled]="noData">Sort By category</button>
-
-  <button class="btn btn-primary m-2" (click)="productsByBrand()" [disabled]="noData">Sort By Brand</button>
+  <!-- <button class="btn btn-primary m-2" (click)="productsByCategory()" [disabled]="noData">Sort By category</button>
+  <button class="btn btn-primary m-2" (click)="allProductsCategory()" [disabled]="noData">Sort By Brand</button> -->
 
   <hr class="border border-primary" />
 
-  <div class="d-flex flex-wrap">
+  <div class="d-flex flex-wrap justify-content-center" *ngIf="singleProductView">
     <div *ngIf="noData" class="text-center">
       <img src="assets/loading.gif" alt="loading Data" width="100px" />
       <h4>Loading Data</h4>
     </div>
+
+      <div  *ngFor="let product of allProducts; index as i"  class="card m-2" style="width: 30%;">
+        <img src="{{product.image_link}}" onerror="this.onerror=null;this.src='https://www.coorg.com/wp-content/themes/TechNews/images/img_not_available.jpg';" class="card-img-top overflow-hidden" style="height: 286px;" >
+        <div class="card-body">
+          <p class="card-title"><span class="text-uppercase pe-3 fw-bold">Name: </span>{{product.name}} </p>
+            <p class="card-title"><span class="text-uppercase pe-3 fw-bold">Brand: </span>{{product.brand}}</p>
+          <!-- <p class="card-text overflow-hidden" style="max-height: 50px;">{{product.product_type}}</p> -->
+          <!-- <p class="card-text">Price {{product.price_sign}} {{product.price}}</p> -->
+          <button (click)="singleProduct(product, i)" class="btn btn-info text-light">More Info</button>
+        </div>
+      </div>
     
-    <div *ngFor="let product of allProducts" class="card m-2" style="width: 18rem;">
-      <!-- <img src="{{product.image_link}}" onerror="this.onerror=null;this.src='https://www.coorg.com/wp-content/themes/TechNews/images/img_not_available.jpg';" class="card-img-top overflow-hidden" style="height: 286px;" > -->
-      <div class="card-body">
-        <!-- <h5 class="card-title">{{product.name}} ({{product.brand}})</h5> -->
-        <p class="card-text overflow-hidden" style="max-height: 50px;">{{product.product_type}}</p>
-        <p class="card-text">Price {{product.price_sign}} {{product.price}}</p>
-        <!-- <a href="{{product.product_link}}" class="btn btn-primary">More Info</a> -->
+  </div>
+  <div class=""  *ngIf="!singleProductView">
+    <h3>Signle Product</h3>
+    <div class="card mb-3" >
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="{{singleProductData.image_link}}" onerror="this.onerror=null;this.src='https://www.coorg.com/wp-content/themes/TechNews/images/img_not_available.jpg';" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <p class="card-title"><span class="text-uppercase pe-3 fw-bold">Name:</span>{{singleProductData.name}}</p>
+            <p class="card-text"><span class="text-uppercase pe-3 fw-bold">Brand:</span>{{singleProductData.brand}}</p>
+            <p class="card-text"><span class="text-uppercase pe-3 fw-bold">Category:</span>{{singleProductData.category}}</p>
+            <p class="card-text"><span class="text-uppercase pe-3 fw-bold">Product Type:</span>{{singleProductData.product_type}}</p>
+            <p class="card-text"><span class="text-uppercase pe-3 fw-bold">Product description:</span>{{singleProductData.description}}</p>
+            <p class="card-text"><span class="text-uppercase pe-3 fw-bold">id:</span>{{singleProductData.id}}</p>
+            <p class="card-text"><span class="text-uppercase pe-3 fw-bold">Price: </span> {{singleProductData.price_sign}}<small class="text-muted"> {{singleProductData.price}}</small> </p>
+          </div>
+        </div>
       </div>
     </div>
+    <button (click)="listProducts()"  class="btn btn-primary">Back To List</button>
+    <button (click)="prevProduct()"  class="btn btn-primary" [disabled]="prevActive">Previous Product</button>
+    <button (click)="nextProduct()"  class="btn btn-primary" [disabled]="nextActive">Next Product</button>
   </div>
-  
-
 </div>
-
-
-<!-- <ul class="list-group list-group-horizontal flex-wrap justify-content-between">
-  <li *ngFor="let dogbread of dogsBread;"  class="list-group-item m-1 text-uppercase text-primary">
-    <span [id]="dogbread" class="" (click)="singleBreadDogs($event)"> {{dogbread}} </span>    
-  </li>
-</ul> -->
