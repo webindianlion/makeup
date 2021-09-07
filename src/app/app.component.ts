@@ -138,7 +138,7 @@ export class AppComponent implements OnInit {
     if (this.singleProductDataIndex == 0) {
       this.prevActive = true;
     }
-    else if( this.singleProductDataIndex + 1 == this.allProducts.length) {
+    if( this.singleProductDataIndex + 1 == this.allProducts.length) {
       this.nextActive = true;
     }
     console.log(this.singleProductDataIndex );

@@ -5,14 +5,11 @@ import { HttpClientModule} from '@angular/common/http'
 import { MakeupService } from './makeup.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProductDetailsComponent } from './product-details/product-details.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ProductDetailsComponent,
-    PageNotFoundComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
