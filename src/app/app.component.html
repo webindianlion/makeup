@@ -1,6 +1,6 @@
 
 <div class="container">
-  <h2 class="bg-primary text-white text-center mb-5 p-3"> Makeup Store App </h2>
+  <h2 class="bg-primary text-white text-center mb-5 p-3"> Makeup Products Store</h2>
   
   <!-- <button class="btn btn-primary m-2" (click)="allProductsCategory()"  [disabled]="noData">category</button>
   <button class="btn btn-primary m-2" (click)="allProductsType()" [disabled]="noData">Product Type</button> -->
@@ -10,40 +10,46 @@
       {{product.category}}
     </li>
   </ul> -->
-  <div class="row">
+  <div class="row"  *ngIf="singleProductView">
     <div class="col">
-      <select name="" id="productsByType" (change)="getFilteredProducts($event)" class="form-select form-select-lg text-uppercase m-2">
-        <option value=""> Product By Type </option>
-        <option *ngFor="let type of allProduct_Type" value="{{type}}"> {{type}} </option>
-      </select>
-    </div>
-    <div class="col">
-      <select name="" id="productsByType" (change)="getFilteredProducts($event)" class="form-select form-select-lg text-uppercase m-2">
-        <option value=""> Product By Category </option>
-        <option *ngFor="let category of allCategory" value="{{category}}"> {{category}} </option>
-      </select>
-    </div>
-    <div class="col">
-      <select name="" id="productsByType" (change)="getFilteredProducts($event)" class="form-select form-select-lg text-uppercase m-2">
-        <option value=""> Product By Brand </option>
-        <option *ngFor="let brand of allBrands" value="{{brand}}"> {{brand}} </option>
-      </select>
+      <div class="row">
+        <div class="col">
+          <select name="" id="productsByType" (change)="getFilteredProducts($event)" class="form-select form-select-lg text-uppercase m-2">
+            <option value=""> Product By Type </option>
+            <option *ngFor="let type of allProduct_Type" value="{{type}}"> {{type}} </option>
+          </select>
+        </div>
+        <div class="col">
+          <select name="" id="productsByType" (change)="getFilteredProducts($event)" class="form-select form-select-lg text-uppercase m-2">
+            <option value=""> Product By Category </option>
+            <option *ngFor="let category of allCategory" value="{{category}}"> {{category}} </option>
+          </select>
+        </div>
+        <div class="col">
+          <select name="" id="productsByType" (change)="getFilteredProducts($event)" class="form-select form-select-lg text-uppercase m-2">
+            <option value=""> Product By Brand </option>
+            <option *ngFor="let brand of allBrands" value="{{brand}}"> {{brand}} </option>
+          </select>
+        </div>
+      </div>
+    
+      <hr class="border border-primary" />
+      
+      <div class="row">
+        <div class="col text-center">
+          <button class="btn btn-primary m-2" (click)="sortByPrice()" [disabled]="noData">Sort By Price(Assending)</button>
+        </div>
+        <div class="col text-center">
+          <button class="btn btn-primary m-2" (click)="sortByPriceReverse()" [disabled]="noData">Sort By Price(Desending)</button>
+        </div>
+        <div class="col text-center">
+          <button class="btn btn-primary m-2" (click)="allProductsData()" [disabled]="noData">All Products</button>
+        </div>    
+      </div>
+    
     </div>
   </div>
 
-  <hr class="border border-primary" />
-  
-  <div class="row">
-    <div class="col text-center">
-      <button class="btn btn-primary m-2" (click)="sortByPrice()" [disabled]="noData">Sort By Price(Assending)</button>
-    </div>
-    <div class="col text-center">
-      <button class="btn btn-primary m-2" (click)="sortByPriceReverse()" [disabled]="noData">Sort By Price(Desending)</button>
-    </div>
-    <div class="col text-center">
-      <button class="btn btn-primary m-2" (click)="allProductsData()" [disabled]="noData">All Products</button>
-    </div>    
-  </div>
 
   <!-- <button class="btn btn-primary m-2" (click)="productsByCategory()" [disabled]="noData">Sort By category</button>
   <button class="btn btn-primary m-2" (click)="allProductsCategory()" [disabled]="noData">Sort By Brand</button> -->
@@ -88,8 +94,10 @@
         </div>
       </div>
     </div>
-    <button (click)="listProducts()"  class="btn btn-primary">Back To List</button>
-    <button (click)="prevProduct()"  class="btn btn-primary" [disabled]="prevActive">Previous Product</button>
-    <button (click)="nextProduct()"  class="btn btn-primary" [disabled]="nextActive">Next Product</button>
+    <div class="row">
+      <div class="col text-center"><button (click)="listProducts()"  class="btn btn-primary">Back To List</button></div>
+      <div class="col text-center"><button (click)="prevProduct()"  class="btn btn-primary" [disabled]="prevActive">Previous Product</button></div>
+      <div class="col text-center"><button (click)="nextProduct()"  class="btn btn-primary" [disabled]="nextActive">Next Product</button></div>
+    </div>    
   </div>
 </div>
